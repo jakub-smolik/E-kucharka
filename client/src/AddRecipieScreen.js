@@ -5,8 +5,6 @@ import { CategoryContext } from "./CategoryContext";
 import { RecipieContext } from "./RecipieContext";
 import { useParams } from "react-router-dom";
 
-
-
 function AddRecipieScreen() {
     const categories = useContext(CategoryContext)
     const {categoryId, recipieId} = useParams();
