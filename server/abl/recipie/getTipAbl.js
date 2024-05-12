@@ -22,7 +22,7 @@ const schema = {
 async function getTip(req, res) {
     try {
         // Getting object with category id from HTTP request
-        let identifier = req.body;
+        let identifier = req.query;
         // Validating of received object.
         const valid = ajv.validate(schema, identifier);
         if (!valid) {

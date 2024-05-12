@@ -13,7 +13,7 @@ const schema = {
         process: {type: "string", maxLength: 500},
     },
     required: ["title", "categoryId", "ingredients", "process"],
-    additionalProperties: false
+    additionalProperties: true
 };
 
 /**
@@ -26,6 +26,7 @@ async function create(req, res) {
     try {
         // Getting recipie object from HTTP request
         let recipie = req.body;
+        console.log(recipie);
         // Validating of received object.
         const valid = ajv.validate(schema, recipie);
         if (!valid) {

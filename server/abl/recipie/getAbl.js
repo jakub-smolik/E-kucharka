@@ -23,7 +23,7 @@ const schema = {
 async function get(req, res) {
     try {
         // Getting object of recipie identifiers from HTTP request
-        let recipieIdentifiers = req.body;
+        let recipieIdentifiers = req.query;
         // Validation of received object.
         const valid = ajv.validate(schema, recipieIdentifiers);
         if (!valid) {

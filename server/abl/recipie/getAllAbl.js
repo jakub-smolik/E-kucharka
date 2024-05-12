@@ -22,7 +22,9 @@ const schema = {
 async function getAll(req, res) {
     try {
         // Getting object from HTTP request. This object contains id of category of whitch recipies will be returned.
-        let idetifier = req.body;
+        //let idetifier = req.body;
+        let idetifier = req.query?.categoryId ? req.query : req.body;
+        console.log(idetifier)
         // Validation of received object.
         const valid = ajv.validate(schema, idetifier);
         if (!valid) {

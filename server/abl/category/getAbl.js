@@ -22,7 +22,7 @@ const schema = {
 async function get(req, res) {
     try {
         // Getting parameters from HTTP request body.
-        const reqParams = req.body;
+        const reqParams = req.query?.id ? req.query : req.body;
         // Validation of parameters in received object.
         const valid = ajv.validate(schema, reqParams);
         if (!valid) {

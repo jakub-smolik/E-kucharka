@@ -42,7 +42,6 @@ function get(id) {
 function getAll () {
     try {
         const files = fs.readdirSync(categoryFolderPath);
-        console.log(files);
         const categoryList = files.map((file) => {
             const fileData = fs.readFileSync(path.join(categoryFolderPath, file), "utf-8");
             return JSON.parse(fileData);
