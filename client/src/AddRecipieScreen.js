@@ -21,9 +21,6 @@ function AddRecipieScreen() {
             const response = await fetch(`http://localhost:3000/recipie/${categoryId && outputData && outputData.id ? "update" : "create"}`, 
             {method: "POST", headers: {"Content-Type": "application/json",}, body: JSON.stringify(formData)});
             const responseJson = await response.json();
-            if (response.categoryId) {
-                alert("Záznam byl uložen");
-            }
         }}>
         <Form.Group className="mb-3" controlId="id">
             <Form.Control type="hidden" name="id" defaultValue={categoryId&&outputData&&outputData.id ? outputData.id : ""}/>
