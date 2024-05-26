@@ -26,7 +26,6 @@ async function create(req, res) {
     try {
         // Getting recipie object from HTTP request
         let recipie = req.body;
-        console.log(recipie);
         // Validating of received object.
         const valid = ajv.validate(schema, recipie);
         if (!valid) {

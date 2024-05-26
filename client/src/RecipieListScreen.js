@@ -5,20 +5,27 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { useParams } from "react-router-dom";
 import { RecipieContext } from "./RecipieContext";
+import ErrorTemplate from "./template/ErrorTemplate";
+import LoadingTemplate from "./template/LoadingTemplate";
 
 function RecipieListScreen() {
     const { outputData, handlers } = useContext(RecipieContext)
     const { category } = useParams()
-    handlers.LoadRecipieList(category)
-    const recipies = outputData || []
-    console.log(recipies)
+    handlers.LoadRecipieList(category);
 
-    return (
-        <div>
-            <h3>Kategorie recptů</h3>
-            {`Nalezeno ${recipies.length} receptů.`}
-            
-            {recipies.map((recipie) => 
+    if (outputData.status === "loading" || ! outputData.response) {
+        return (
+            <LoadingTemplate />
+        )
+    } else if (outputData.status === "error") {
+        return (
+            <ErrorTemplate errorMessage = { outputData.response } />
+        )
+    } else if (outputData.status === "ready") {
+        return (
+            <div>
+            {outputData.response.length === 0 ? "Tato kategorie neopsahuje žádné recepty." : <h3>Kategorie recptů</h3>}
+            {outputData.response.map((recipie) => 
                 <Card style={cardStyle()}>
                     <Card.Header>{`Recept byl vytvořen ${recipie.date}`}</Card.Header>
                     <Card.Body>
@@ -33,11 +40,14 @@ function RecipieListScreen() {
                         <Button variant="primary" size="sm" style={buttonStyle()}>Upravit</Button>
                         </Link>
                     </Card.Body>
-                  </Card>
+                    </Card>      
             )}
-    
-        </div>
-    )
+
+
+            {outputData.response = null}
+            </div>
+        )
+    }
 }
 
 function cardStyle() {

@@ -17,11 +17,25 @@ function RandomSelectScreen() {
                     <option value={category.id}>{category.title}</option>
                 )}
             </Form.Select>
-            <Link to={`/randomRecipie/${value}`}>
-            <Button variant="primary" disabled={!value} >Vyhledat náhodný recept</Button>{' '}
-            </Link>
+            <div style={ buttonsStyle() }>
+                <Link to={`/randomRecipie/${value}`}>
+                <Button variant="primary" disabled={!value} >Vyhledat náhodný recept</Button>{' '}
+                </Link>
+
+                <Link to={`/`}>
+                <Button variant="secondary">
+                    Storno
+                </Button>
+                </Link>
+            </div>
         </div>
     )
+}
+
+function buttonsStyle() {
+    return{
+        margin: "10px 0px"
+    }
 }
 
 export default RandomSelectScreen
